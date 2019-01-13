@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'AddEntryDialog.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key : key);
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
 
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {_buttonPressed(1);},
+        onPressed: _openAddEntryDialog,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
@@ -52,6 +53,20 @@ class _HomePageState extends State<HomePage> {
       ),
 
     );
+  }
+
+  Future _openAddEntryDialog() async{
+    String result = await Navigator.of(context).push(new MaterialPageRoute<String>(
+        builder: (BuildContext context) {
+          return new AddEntryDialog();
+        },
+        fullscreenDialog: true
+    ));
+
+    if(result != null){
+      print(result);
+    }
+
   }
 
 }
