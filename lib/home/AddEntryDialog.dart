@@ -11,55 +11,52 @@ class _AddEntryDialogState extends State<AddEntryDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Neuer Eintrag"),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () {
-                Navigator.of(context).pop("Kleiner Test");
-              },
-              child: Text(
-                "Speichern",
-                style: TextStyle(color: Colors.white),
-              ),
-            )
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Neuer Eintrag"),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop("Kleiner Test");
+            },
+            child: Text(
+              "Speichern",
+              style: TextStyle(color: Colors.white),
+            ),
+          )
+        ],
+      ),
+      body: Container(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                RadioListTile(
+                  groupValue: _radioValue,
+                  onChanged: _radioValueChange,
+                  value: 0,
+                  title: Text("Hausaufgabe"),
+                ),
+                RadioListTile(
+                  groupValue: _radioValue,
+                  onChanged: _radioValueChange,
+                  value: 1,
+                  title: Text("Prüfung"),
+                ),
+              ],
+            ),
+            Container(
+              child: Divider(),
+              padding: EdgeInsets.symmetric(horizontal: 40.0),
+            ),
+            homework ? Homework() : Test()
           ],
         ),
-        body: Container(
-          padding: EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  RadioListTile(
-                    groupValue: _radioValue,
-                    onChanged: _radioValueChange,
-                    value: 0,
-                    title: Text("Hausaufgabe"),
-                  ),
-                  RadioListTile(
-                    groupValue: _radioValue,
-                    onChanged: _radioValueChange,
-                    value: 1,
-                    title: Text("Prüfung"),
-                  ),
-                ],
-              ),
-              Container(
-                child: Divider(),
-                padding: EdgeInsets.symmetric(horizontal: 40.0),
-              ),
-              homework ? Homework() : Test()
-            ],
-          ),
-        ),
       ),
-      tag: "add_entry_hero",
     );
   }
 
