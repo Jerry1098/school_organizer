@@ -17,7 +17,7 @@ class _AddEntryDialogState extends State<AddEntryDialog> {
         actions: <Widget>[
           FlatButton(
             onPressed: () {
-              Navigator.of(context).pop("Kleiner Test");
+              Navigator.of(context).pop();
             },
             child: Text(
               "Speichern",

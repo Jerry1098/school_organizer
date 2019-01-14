@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'AddEntryDialog.dart';
 
 class HomePage extends StatefulWidget {
@@ -72,16 +73,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future _openAddEntryDialog() async {
-    String result =
-        await Navigator.of(context).push(new MaterialPageRoute<String>(
-            builder: (BuildContext context) {
-              return new AddEntryDialog();
-            },
-            fullscreenDialog: true));
-
-    if (result != null) {
-      print(result);
-    }
+  _openAddEntryDialog() {
+    Navigator.of(context).push(new MaterialPageRoute<Null>(
+        builder: (BuildContext context) {
+          return new AddEntryDialog();
+        },
+        fullscreenDialog: true));
   }
 }
