@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'AddEntryDialog.dart';
 
 class HomePage extends StatefulWidget {
