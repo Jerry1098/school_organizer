@@ -20,9 +20,8 @@ class Pruefung {
   String get pruefungsTermin => _pruefungsTermin;
 
   Map<String, dynamic> toJson() => {
-    "termin": _pruefungsTermin,
-    "fach": _fach,
-    "lehrnstoff": _lehrnstoff,
-  };
-
+        "termin": _pruefungsTermin,
+        "fach": _fach,
+        "lehrnstoff": _lehrnstoff,
+      };
 }
