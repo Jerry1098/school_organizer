@@ -8,56 +8,60 @@ class AddEntryDialog extends StatefulWidget {
 class _AddEntryDialogState extends State<AddEntryDialog> {
   int _radioValue = 0;
   bool homework = true;
+  Text title = Text("Neuer Eintrag");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Neuer Eintrag"),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              "Speichern",
-              style: TextStyle(color: Colors.white),
-            ),
-          )
-        ],
-      ),
-      body: Container(
-        padding: EdgeInsets.all(10.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                RadioListTile(
-                  groupValue: _radioValue,
-                  onChanged: _radioValueChange,
-                  value: 0,
-                  title: Text("Hausaufgabe"),
-                ),
-                RadioListTile(
-                  groupValue: _radioValue,
-                  onChanged: _radioValueChange,
-                  value: 1,
-                  title: Text("Prüfung"),
-                ),
-              ],
-            ),
-            Container(
-              child: Divider(),
-              padding: EdgeInsets.symmetric(horizontal: 40.0),
-            ),
-            homework ? Homework() : Test()
+        appBar: AppBar(
+          title: title,
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Speichern",
+                style: TextStyle(color: Colors.white),
+              ),
+            )
           ],
         ),
-      ),
-    );
+        body: Container(
+          margin: EdgeInsets.all(5.0),
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Card(
+                      child: InkWell(
+                        child: Center(
+                            child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 15.0),
+                          child: Text("Test"),
+                        )),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Card(
+                      child: InkWell(
+                        child: Center(
+                            child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 15.0),
+                          child: Text("Test"),
+                        )),
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ));
   }
 
   _radioValueChange(int value) {

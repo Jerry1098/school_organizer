@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'SchoolOrganizer',
       theme: themeData,
       home: loadingScreen(),
+      debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
         '/HomePage': (BuildContext context) => HomePage()
       },
