@@ -5,21 +5,24 @@ import 'package:school_organizer/backend/stundenplan/Lehrer.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/material.dart';
 
 class Saves {
-  String hausaufgaben_key = "hausaufgaben_key234423";
-  String faecher_key = "faecher_key2445623";
-  String lehrer_key = "lehrer_key1234321";
-  String pruefungen_key = "pruefungen_key1234532";
+  String hausaufgaben_name = "hausaufgaben.json";
+  String faecher_name = "faecher.json";
+  String lehrer_name = "lehrer.json";
+  String pruefungen_name = "pruefungen.json";
 
-  List<Hausaufgabe> hausaufgaben;
-  List<Fach> faecher;
-  List<Lehrer> lehrer;
-  List<Pruefung> pruefungen;
+  List<Hausaufgabe> hausaufgaben = [];
+  List<Fach> faecher = [];
+  List<Lehrer> lehrer = [];
+  List<Pruefung> pruefungen = [];
 
   Future<bool> readAll() async {
-    print("Sieht gut aus");
-    await sleep();
+    json
+        .decode(await readFile(hausaufgaben_name))
+        .forEach((map) => hausaufgaben.add(Hausaufgabe.fromJson(map)));
     return true;
   }
 
