@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home/HomePage.dart';
+import 'loadingScreen.dart';
+import 'package:school_organizer/home/HomePage.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,15 +11,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SchoolOrganizer',
       theme: themeData,
-      home: HomePage()
+      home: loadingScreen(),
+      routes: <String, WidgetBuilder>{
+        '/HomePage': (BuildContext context) => HomePage()
+      },
     );
   }
 
   ThemeData themeData = ThemeData(
-    primaryColor: Colors.blueGrey,
-    accentColor: Colors.orangeAccent,
-    fontFamily: "Poppins"
-  );
-
+      primaryColor: Colors.blueGrey,
+      accentColor: Colors.orangeAccent,
+      fontFamily: "Poppins");
 }
-
