@@ -9,9 +9,20 @@ class _AddEntryDialogState extends State<AddEntryDialog> {
   int _radioValue = 0;
   bool homework = true;
   Text title = Text("Neuer Eintrag");
+  PageController controller = PageController();
+  var currentPageValue = 0.0;
+  Color colorTest = Colors.orangeAccent.withOpacity(0.0);
+  Color colorHomework = Colors.orangeAccent;
 
   @override
   Widget build(BuildContext context) {
+    controller.addListener(() {
+      setState(() {
+        currentPageValue = controller.page;
+        colorHomework = Colors.orangeAccent.withOpacity(1.0 - currentPageValue);
+        colorTest = Colors.orangeAccent.withOpacity(currentPageValue);
+      });
+    });
     return Scaffold(
         appBar: AppBar(
           title: title,
@@ -34,30 +45,57 @@ class _AddEntryDialogState extends State<AddEntryDialog> {
               Row(
                 children: <Widget>[
                   Expanded(
-                    child: Card(
-                      child: InkWell(
-                        child: Center(
-                            child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 15.0),
-                          child: Text("Test"),
-                        )),
+                    child: Container(
+                      child: Card(
+                        margin: EdgeInsets.only(
+                            bottom: 10.0, top: 5.0, right: 5.0, left: 5.0),
+                        color: colorHomework,
+                        child: InkWell(
+                          onTap: () {
+                            _radioValueChange(0);
+                          },
+                          child: Center(
+                              child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 20.0),
+                            child: Text("Hausaufgabe"),
+                          )),
+                        ),
                       ),
                     ),
                   ),
                   Expanded(
                     child: Card(
+                      margin: EdgeInsets.only(
+                          bottom: 10.0, top: 5.0, right: 5.0, left: 5.0),
+                      color: colorTest,
                       child: InkWell(
+                        onTap: () {
+                          _radioValueChange(1);
+                        },
                         child: Center(
                             child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 15.0),
-                          child: Text("Test"),
+                              horizontal: 8.0, vertical: 20.0),
+                          child: Text("Prüfung"),
                         )),
                       ),
                     ),
                   )
                 ],
+              ),
+              Container(
+                child: Divider(),
+                padding: EdgeInsets.only(bottom: 10.0),
+              ),
+              Expanded(
+                child: PageView(
+                  controller: controller,
+                  children: <Widget>[
+                    Container(child: addHomework()),
+                    Container(child: addTest()),
+                  ],
+                ),
               )
             ],
           ),
@@ -65,35 +103,42 @@ class _AddEntryDialogState extends State<AddEntryDialog> {
   }
 
   _radioValueChange(int value) {
+    print(value);
     setState(() {
       _radioValue = value;
       if (_radioValue == 0) {
-        homework = true;
+        controller.animateToPage(0,
+            duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       } else {
-        homework = false;
+        controller.animateToPage(1,
+            duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       }
     });
   }
 }
 
-class Homework extends StatefulWidget {
-  _HomeworkState createState() => _HomeworkState();
+class addHomework extends StatefulWidget {
+  addHomeworkState createState() => addHomeworkState();
 }
 
-class _HomeworkState extends State<Homework> {
-  @override
+class addHomeworkState extends State<addHomework> {
   Widget build(BuildContext context) {
-    return Text("Hausaufgabe");
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+      child: Center(child: Text("Hausaufgabe")),
+    );
   }
 }
 
-class Test extends StatefulWidget {
-  _TestState createState() => _TestState();
+class addTest extends StatefulWidget {
+  addTestState createState() => addTestState();
 }
 
-class _TestState extends State<Test> {
-  @override
+class addTestState extends State<addTest> {
   Widget build(BuildContext context) {
-    return Text("Prüfung");
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+      child: Center(child: Text("Prüfung")),
+    );
   }
 }
