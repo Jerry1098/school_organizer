@@ -14,4 +14,12 @@ class Lehrer {
   String get geschlecht => _geschlecht;
 
   Map<String, dynamic> toJson() => {"name": _name, "geschlecht": _geschlecht};
+
+  set geschlecht(String value) {
+    _geschlecht = value;
+  }
+
+  set name(String value) {
+    _name = value;
+  }
 }

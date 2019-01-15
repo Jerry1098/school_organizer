@@ -1,5 +1,3 @@
-import 'package:school_organizer/backend/stundenplan/Fach.dart';
-
 class Pruefung {
   String _pruefungsTermin;
   String _fach;
@@ -24,4 +22,16 @@ class Pruefung {
         "fach": _fach,
         "lehrnstoff": _lehrnstoff,
       };
+
+  set lehrnstoff(String value) {
+    _lehrnstoff = value;
+  }
+
+  set fach(String value) {
+    _fach = value;
+  }
+
+  set pruefungsTermin(String value) {
+    _pruefungsTermin = value;
+  }
 }

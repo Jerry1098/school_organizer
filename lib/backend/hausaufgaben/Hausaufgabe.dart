@@ -1,5 +1,3 @@
-import 'package:school_organizer/backend/stundenplan/Fach.dart';
-
 class Hausaufgabe {
   String _abgabeTermin;
   String _fach;
@@ -29,4 +27,20 @@ class Hausaufgabe {
         "aufgabe": _aufgabe,
         "wichtig": _wichtig
       };
+
+  set aufgabe(String value) {
+    _aufgabe = value;
+  }
+
+  set wichtig(bool value) {
+    _wichtig = value;
+  }
+
+  set fach(String value) {
+    _fach = value;
+  }
+
+  set abgabeTermin(String value) {
+    _abgabeTermin = value;
+  }
 }

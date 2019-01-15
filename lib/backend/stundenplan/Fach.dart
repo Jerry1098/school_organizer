@@ -23,4 +23,16 @@ class Fach {
 
   Map<String, dynamic> toJson() =>
       {"name": _name, "lehrer": _lehrer, "color": _color};
+
+  set lehrer(String value) {
+    _lehrer = value;
+  }
+
+  set color(String value) {
+    _color = value;
+  }
+
+  set name(String value) {
+    _name = value;
+  }
 }
