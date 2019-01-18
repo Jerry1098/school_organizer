@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:school_organizer/backend/Saves.dart';
+import 'package:date_format/date_format.dart';
 
 class AddEntryDialog extends StatefulWidget {
   @override
@@ -206,6 +207,22 @@ class addTest extends StatefulWidget {
 
 class addTestState extends State<addTest> {
   String selectedSubjectTest;
+  DateTime selectedDate = DateTime.now();
+  DateTime firstDate = DateTime(2019);
+  DateTime lastDate = DateTime(2100);
+
+  Future<Null> _selectDate(BuildContext context) async {
+    DateTime picked = await showDatePicker(
+      context: context,
+      firstDate: firstDate,
+      lastDate: lastDate,
+      initialDate: selectedDate,
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
 
   Widget build(BuildContext context) {
     return Column(
@@ -228,6 +245,15 @@ class addTestState extends State<addTest> {
             ),
           ),
         ),
+        Card(
+            margin: EdgeInsets.all(20.0),
+            child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: FlatButton(
+                  onPressed: () => _selectDate(context),
+                  child:
+                      Text(formatDate(selectedDate, [dd, ' ', M, ' ', yyyy])),
+                )))
       ],
     );
   }
