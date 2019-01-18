@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school_organizer/backend/Saves.dart';
 
 class AddEntryDialog extends StatefulWidget {
   @override
@@ -148,6 +149,22 @@ class _AddEntryDialogState extends State<AddEntryDialog> {
       }
     });
   }
+
+  static List<DropdownMenuItem<String>> getFaecher() {
+    List<String> faecher = ["Testfach1", "Testfach2"];
+    Saves saves = Saves();
+
+    for (int i = 0; i < saves.faecher.length; i++) {
+      faecher.add(saves.faecher[i].name);
+    }
+
+    return faecher
+        .map((String value) => DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            ))
+        .toList();
+  }
 }
 
 class addHomework extends StatefulWidget {
@@ -155,10 +172,30 @@ class addHomework extends StatefulWidget {
 }
 
 class addHomeworkState extends State<addHomework> {
+  String _selectedSubjectHomework;
+
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-      child: Center(child: Text("Hausaufgabe")),
+    return Column(
+      children: <Widget>[
+        Card(
+          margin: EdgeInsets.all(20.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButton(
+              isExpanded: true,
+              value: _selectedSubjectHomework,
+              hint: Text("Wähle ein Fach"),
+              onChanged: ((String newValue) {
+                setState(() {
+                  _selectedSubjectHomework = newValue;
+                  print(newValue);
+                });
+              }),
+              items: _AddEntryDialogState.getFaecher(),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -168,10 +205,30 @@ class addTest extends StatefulWidget {
 }
 
 class addTestState extends State<addTest> {
+  String selectedSubjectTest;
+
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-      child: Center(child: Text("Prüfung")),
+    return Column(
+      children: <Widget>[
+        Card(
+          margin: EdgeInsets.all(20.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButton(
+              isExpanded: true,
+              value: selectedSubjectTest,
+              hint: Text("Wähle ein Fach"),
+              onChanged: ((String newValue) {
+                setState(() {
+                  selectedSubjectTest = newValue;
+                  print(newValue);
+                });
+              }),
+              items: _AddEntryDialogState.getFaecher(),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
