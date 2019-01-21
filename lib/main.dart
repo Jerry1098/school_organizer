@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'loadingScreen.dart';
 import 'package:school_organizer/home/HomePage.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,6 +19,13 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/HomePage': (BuildContext context) => HomePage()
       },
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('de', 'DE'),
+      ],
     );
   }
 

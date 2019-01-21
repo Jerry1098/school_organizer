@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:school_organizer/backend/Saves.dart';
-import 'package:date_format/date_format.dart';
+import 'package:intl/intl.dart';
 
 class AddEntryDialog extends StatefulWidget {
   @override
@@ -97,8 +97,13 @@ class _AddEntryDialogState extends State<AddEntryDialog> {
                 child: PageView(
                   controller: controller,
                   children: <Widget>[
-                    Container(child: addHomework()),
-                    Container(child: addTest()),
+                    Container(
+                        child: SingleChildScrollView(
+                      child: addHomework(),
+                    )),
+                    Container(
+                      child: SingleChildScrollView(child: addTest()),
+                    ),
                   ],
                 ),
               )
@@ -152,11 +157,11 @@ class _AddEntryDialogState extends State<AddEntryDialog> {
   }
 
   static List<DropdownMenuItem<String>> getFaecher() {
-    List<String> faecher = ["Testfach1", "Testfach2"];
-    Saves saves = Saves();
+    List<String> faecher = [];
 
-    for (int i = 0; i < saves.faecher.length; i++) {
-      faecher.add(saves.faecher[i].name);
+    for (int i = 0; i < Saves.faecher.length; i++) {
+      faecher.add(Saves.faecher[i].name);
+      print(Saves.faecher[i].name);
     }
 
     return faecher
@@ -246,13 +251,13 @@ class addTestState extends State<addTest> {
           ),
         ),
         Card(
-            margin: EdgeInsets.all(20.0),
+            margin: EdgeInsets.all(10.0),
             child: Padding(
                 padding: EdgeInsets.all(8.0),
                 child: FlatButton(
                   onPressed: () => _selectDate(context),
                   child:
-                      Text(formatDate(selectedDate, [dd, ' ', M, ' ', yyyy])),
+                      Text("Am: " + DateFormat.yMd("de").format(selectedDate)),
                 )))
       ],
     );

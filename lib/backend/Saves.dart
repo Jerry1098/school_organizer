@@ -14,13 +14,16 @@ class Saves {
   String pruefungen_name = "pruefungen.json";
   String stundenTag_name = "stundenTage.json";
 
-  List<Hausaufgabe> hausaufgaben = [];
-  List<Fach> faecher = [];
-  List<Lehrer> lehrer = [];
-  List<Pruefung> pruefungen = [];
-  List<StundenTag> stundenTage = [];
+  static List<Hausaufgabe> hausaufgaben = [];
+  static List<Fach> faecher = [];
+  static List<Lehrer> lehrer = [];
+  static List<Pruefung> pruefungen = [];
+  static List<StundenTag> stundenTage = [];
 
   Future<bool> readAll() async {
+    faecher.add(Fach("Deutsch", "Distler", "red"));
+    faecher.add(Fach("Mathe", "Ober", "blau"));
+    print("Hallo");
     try {
       if (await readFile(hausaufgaben_name) != null)
         json
